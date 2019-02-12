@@ -12,7 +12,7 @@
  * @author Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
-public class ClockDisplay12Hr
+public class ClockDisplay12HR
 {
     private NumberDisplay hours;
     private NumberDisplay minutes;
@@ -22,9 +22,9 @@ public class ClockDisplay12Hr
      * Constructor for ClockDisplay objects. This constructor
      * creates a new clock set at 00:00.
      */
-    public ClockDisplay()
+    public ClockDisplay12HR()
     {
-        hours = new NumberDisplay(24);
+        hours = new NumberDisplay(12);
         minutes = new NumberDisplay(60);
         updateDisplay();
     }
@@ -34,7 +34,7 @@ public class ClockDisplay12Hr
      * creates a new clock set at the time specified by the
      * parameters.
      */
-    public ClockDisplay(int hour, int minute)
+    public ClockDisplay12HR(int hour, int minute)
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
@@ -78,7 +78,23 @@ public class ClockDisplay12Hr
      */
     private void updateDisplay()
     {
-        displayString = hours.getDisplayValue() + ":" +
-                        minutes.getDisplayValue();
+         int hour = hours.getValue();
+       String suffix;
+       if (hour >= 12)
+       { suffix = "PM";
+        }
+        else
+        {
+            suffix = "AM";
+        }
+        if(hour >= 12) {
+            hour = hour -12;
+        }
+        if(hour == 0) {
+            hour = 12;
+        }
+        
+        displayString = hour + ":" + 
+                        minutes.getDisplayValue() + suffix;
     }
 }
